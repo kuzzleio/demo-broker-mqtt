@@ -8,7 +8,7 @@ A tiny Node.js MQTT broker with Mosca
 $ docker-compose up --build
 ```
 
-will build with latest Node.js image, install npm dependencies and run brocker
+will build with latest Node.js image, install npm dependencies and run broker
 
 ### Testing broker
 
