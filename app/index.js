@@ -22,35 +22,36 @@ var kuzzle = new Kuzzle(
     }
     console.log("Connected to Kuzzle");
     var server = new mosca.Server(brokerSettings);
+
+    server.on('ready', function () {
+      console.log("Broker ready on port : " + brokerSettings.port);
+    });
+
+    server.on('clientConnected', function (client) {
+      console.log('client connected', client.id);
+    });
+
+    server.on('published', function (packet, client) {
+      console.log('Packet received', packet);
+
+      const data = {
+        topic: packet.topic,
+        payload: packet.payload.toString(),
+        messageId: packet.messageId,
+        qos: packet.qos,
+        retain: packet.retain
+      };
+
+      kuzzle
+        .collection('ineo-data', 'ineo')
+        .createDocument(data, function (err, res) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          console.log('Document sent to Kuzzle');
+        });
+    });
   }
 );
 
-server.on('ready', function () {
-  console.log("Broker ready on port : " + brokerSettings.port);
-});
-
-server.on('clientConnected', function (client) {
-  console.log('client connected', client.id);
-});
-
-server.on('published', function (packet, client) {
-  console.log('Packet received', packet);
-
-  const data = {
-    topic: packet.topic,
-    payload: packet.payload.toString(),
-    messageId: packet.messageId,
-    qos: packet.qos,
-    retain: packet.retain
-  };
-
-  kuzzle
-    .collection('ineo-data', 'ineo')
-    .createDocument(data, function (err, res) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      console.log('Document sent to Kuzzle');
-    });
-});
