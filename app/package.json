@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/kuzzleio/demo-broker-mqtt#readme",
   "dependencies": {
+    "kuzzle-sdk": "^5.0.11",
     "mosca": "^2.7.0"
   }
 }

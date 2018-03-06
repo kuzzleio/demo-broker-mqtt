@@ -8,8 +8,11 @@ services:
     command: >
       bash -c "cd /src/app && npm install && node index.js"
     ports:
-      - "1883:1883"
-  
+      - "9010:1883"
+    labels:
+      consul.service: web
+      consul.tags: broker-ineo
+
   kuzzle:
     image: kuzzleio/kuzzle
     ports:
@@ -24,9 +27,15 @@ services:
       - kuzzle_services__internalCache__node__host=redis
       - kuzzle_services__memoryStorage__node__host=redis
       - NODE_ENV=production
+    labels:
+      consul.service: kuzzle
+      consul.tags: kuzzle-ineo
+      consul.port: '7512'
 
   redis:
     image: redis:3.2
+    labels:
+      consul.skip: "true"
 
   elasticsearch:
     image: kuzzleio/elasticsearch:5.4.1
@@ -39,10 +48,16 @@ services:
       - http.host=0.0.0.0
       - transport.host=0.0.0.0
       - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
-
+    labels:
+      consul.skip: "true"
+  
   kibana:
     image: docker.elastic.co/kibana/kibana:5.4.1
     environment:
       - SERVER_HOST=0.0.0.0
     volumes:
       - "./kibana.yml:/usr/share/kibana/config/kibana.yml"
+    labels:
+      consul.service: web
+      consul.tags: kibana-ineo
+      consul.port: '5601'

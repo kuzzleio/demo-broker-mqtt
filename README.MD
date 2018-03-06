@@ -1,35 +1,11 @@
 # DEMO BROKER MQTT
 
-A tiny Node.js MQTT broker with Mosca
+Node.js MQTT broker with Mosca for IoT demo
 
 ### Usage
 
 ``` bash
-$ docker-compose up --build
+$ docker-compose up
 ```
 
-will build with latest Node.js image, install npm dependencies and run broker
-
-### Testing broker
-
-first set your docker container IP in `test/publisher_test.js` and `test/subscriber_test.js`
-``` javascript
-var client = mqtt.connect('mqtt://PUT_YOUR_BROKER_IP_HERE');
-```
-
-and
-
-``` bash
-$ cd test/ && npm install
-```
-
-after installing dependencies : 
-
-``` bash
-$ node publisher_test.js
-```
-and in another terminal
-
-``` bash
-$ node subscriber_test.js
-```
+will run the broker and launch Kuzzle stack
