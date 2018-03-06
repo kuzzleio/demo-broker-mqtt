@@ -20,7 +20,9 @@ var kuzzle = new Kuzzle(
       console.log(err);
       return;
     }
+    
     console.log("Connected to Kuzzle");
+
     var server = new mosca.Server(brokerSettings);
 
     server.on('ready', function () {

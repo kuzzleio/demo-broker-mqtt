@@ -1,5 +1,5 @@
 var mqtt = require('mqtt');
-var client = mqtt.connect('mqtt://broker-ineo.uat.kuzzle.io');
+var client = mqtt.connect('mqtt://uat.kuzzle.io');
 
 client.on('connect', function () {
     console.log("connected to broker")
