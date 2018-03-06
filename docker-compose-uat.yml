@@ -12,6 +12,7 @@ services:
     labels:
       consul.service: web
       consul.tags: broker-ineo
+      consul.port: '9010'
 
   kuzzle:
     image: kuzzleio/kuzzle
