@@ -6,7 +6,7 @@ var Kuzzle = require('kuzzle-sdk');
 
 //connect to kuzzle
 var kuzzle = new Kuzzle(
-  '172.24.0.5', 
+  'kuzzle-ineo.uat.kuzzle.io', 
   {
     defaultIndex: 'ineo',
     autoReconnect: true
