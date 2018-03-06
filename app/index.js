@@ -4,6 +4,10 @@
 var mosca  = require('mosca');
 var Kuzzle = require('kuzzle-sdk');
 
+var brokerSettings = {
+  port: 1883
+}
+
 //connect to kuzzle
 var kuzzle = new Kuzzle(
   'kuzzle-ineo.uat.kuzzle.io', 
@@ -17,17 +21,12 @@ var kuzzle = new Kuzzle(
       return;
     }
     console.log("Connected to Kuzzle");
+    var server = new mosca.Server(brokerSettings);
   }
 );
 
-var settings = {
-  port: 9010
-}
-
-var server = new mosca.Server(settings);
-
 server.on('ready', function () {
-  console.log("Broker ready on port : " + settings.port);
+  console.log("Broker ready on port : " + brokerSettings.port);
 });
 
 server.on('clientConnected', function (client) {
@@ -53,5 +52,5 @@ server.on('published', function (packet, client) {
         return;
       }
       console.log('Document sent to Kuzzle');
-    })
+    });
 });
