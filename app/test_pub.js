@@ -1,5 +1,5 @@
 var mqtt = require('mqtt');
-var client = mqtt.connect('mqtt://172.24.0.4');
+var client = mqtt.connect('mqtt://broker-ineo.uat.kuzzle.io');
 
 client.on('connect', function () {
     setInterval(function () {

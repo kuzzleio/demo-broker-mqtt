@@ -21,7 +21,7 @@ var kuzzle = new Kuzzle(
 );
 
 var settings = {
-  port: 1883
+  port: 9010
 }
 
 var server = new mosca.Server(settings);
