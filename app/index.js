@@ -20,7 +20,7 @@ var kuzzle = new Kuzzle(
       console.log(err);
       return;
     }
-
+    
     console.log("Connected to Kuzzle");
     
     var server = new mosca.Server(brokerSettings);
@@ -38,7 +38,7 @@ var kuzzle = new Kuzzle(
 
       const data = {
         topic: packet.topic,
-        payload: packet.payload,
+        payload: packet.payload.toString(),
         messageId: packet.messageId,
         qos: packet.qos,
         retain: packet.retain
