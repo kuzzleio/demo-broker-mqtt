@@ -13,17 +13,16 @@ var kuzzle = new Kuzzle(
   'kuzzle-ineo.uat.kuzzle.io', 
   {
     defaultIndex: 'ineo',
-    autoReconnect: true,
-    port: 7515
+    autoReconnect: true
   },
   function (err, res) {
     if (err) {
       console.log(err);
       return;
     }
-
+    
     console.log("Connected to Kuzzle");
-
+    
     var server = new mosca.Server(brokerSettings);
 
     server.on('ready', function () {
